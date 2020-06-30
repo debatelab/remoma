@@ -1,0 +1,623 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     18215,        615]
+NotebookOptionsPosition[     14928,        498]
+NotebookOutlinePosition[     15317,        515]
+CellTagsIndexPosition[     15274,        512]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["The Mathematica Partial Positions Framework for TDS", "Title",
+ CellChangeTimes->{{3.69296130192008*^9, 3.692961335976885*^9}}],
+
+Cell["\<\
+A Basic Introduction
+G. Betz, 10/01/2017\
+\>", "Subtitle",
+ CellChangeTimes->{{3.69296129435448*^9, 3.692961300288548*^9}, {
+  3.6929613545216913`*^9, 3.692961380067461*^9}, {3.6930286905942717`*^9, 
+  3.693028717843937*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"If", "[", 
+     RowBox[{
+      RowBox[{"!", 
+       RowBox[{"MemberQ", "[", 
+        RowBox[{"$Path", ",", "#"}], "]"}]}], ",", 
+      RowBox[{"AppendTo", "[", 
+       RowBox[{"$Path", ",", " ", "#"}], "]"}]}], "]"}], "&"}], "[", 
+   RowBox[{"FileNameJoin", "[", 
+    RowBox[{"{", 
+     RowBox[{
+     "\"\<Documents\>\"", ",", "\"\<Philosophie\>\"", ",", 
+      "\"\<dialektische_strukturen\>\"", ",", 
+      "\"\<partial_positions_framework\>\"", ",", "\"\<packages\>\""}], "}"}],
+     "]"}], "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"<<", "BasicTDS`"}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"<<", "InductiveReasoning`"}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"<<", "PositionsAnalytics`"}], ";"}]}], "Code",
+ CellChangeTimes->{3.692963255691959*^9}],
+
+Cell[CellGroupData[{
+
+Cell["Sentence Pool and Dialectical Structures", "Section",
+ CellChangeTimes->{{3.69296139043405*^9, 3.692961402953678*^9}, 
+   3.692963920364222*^9}],
+
+Cell["We use integers as names for sentences.", "Text",
+ CellChangeTimes->{{3.692961447849124*^9, 3.692961461218927*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"senIDs", " ", "=", " ", 
+  RowBox[{"Range", "[", "7", "]"}]}]], "Input",
+ CellChangeTimes->{{3.692961462880377*^9, 3.6929614765954657`*^9}, {
+  3.692963083146152*^9, 3.692963083211478*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"1", ",", "2", ",", "3", ",", "4", ",", "5", ",", "6", ",", "7"}], 
+  "}"}]], "Output",
+ CellChangeTimes->{3.6929614769645042`*^9, 3.692961697897088*^9, 
+  3.69296308418259*^9, 3.693028579644367*^9, 3.693139997470991*^9}]
+}, Open  ]],
+
+Cell["Sentences can be negated.", "Text",
+ CellChangeTimes->{{3.692961485515298*^9, 3.692961492531464*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"!", "6"}]], "Input",
+ CellChangeTimes->{{3.692961502196149*^9, 3.6929615027719088`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"!", "6"}]], "Output",
+ CellChangeTimes->{3.6929615034298983`*^9, 3.69302857970292*^9, 
+  3.693140032611699*^9}]
+}, Open  ]],
+
+Cell["An argument is represented as material implication.", "Text",
+ CellChangeTimes->{{3.6929615118943233`*^9, 3.692961557956414*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"a", "=", 
+  RowBox[{
+   RowBox[{"1", "&&", "2"}], "\[Implies]", 
+   RowBox[{"!", "5"}]}]}]], "Input",
+ CellChangeTimes->{{3.692961559454218*^9, 3.692961559457089*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"1", "&&", "2"}], "\[Implies]", 
+  RowBox[{"!", "5"}]}]], "Output",
+ CellChangeTimes->{3.692961559980465*^9, 3.693028579752685*^9, 
+  3.693140043181592*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"b", "=", 
+  RowBox[{
+   RowBox[{"3", "&&", "4"}], "\[Implies]", "5"}]}]], "Input",
+ CellChangeTimes->{{3.6929615737711477`*^9, 3.6929615903750477`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"3", "&&", "4"}], "\[Implies]", "5"}]], "Output",
+ CellChangeTimes->{3.692961591208703*^9, 3.693028579801753*^9, 
+  3.6931400575766087`*^9}]
+}, Open  ]],
+
+Cell["A dialectical structure is a conjunctions of such arguments.", "Text",
+ CellChangeTimes->{{3.692961602958054*^9, 3.692961615782586*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"tau1", "=", 
+  RowBox[{"a", " ", "&&", " ", "b", " "}]}]], "Input",
+ CellChangeTimes->{{3.692961568840397*^9, 3.6929615987254744`*^9}, 
+   3.692962935455517*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(", 
+   RowBox[{
+    RowBox[{"1", "&&", "2"}], "\[Implies]", 
+    RowBox[{"!", "5"}]}], ")"}], "&&", 
+  RowBox[{"(", 
+   RowBox[{
+    RowBox[{"3", "&&", "4"}], "\[Implies]", "5"}], ")"}]}]], "Output",
+ CellChangeTimes->{3.692961599329453*^9, 3.692962936659463*^9, 
+  3.693028579853853*^9, 3.693140072858396*^9}]
+}, Open  ]],
+
+Cell["Creating a random tau.", "Text",
+ CellChangeTimes->{{3.692961626066951*^9, 3.692961651871958*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"tau2", " ", "=", " ", 
+  RowBox[{"RandomTau", "[", 
+   RowBox[{"6", ",", "2", ",", "senIDs"}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.6929616542599382`*^9, 3.692961660984329*^9}, {
+   3.692961704024931*^9, 3.6929617450478153`*^9}, 3.692962939067528*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"!", "1"}], "&&", 
+     RowBox[{"!", "4"}]}], "\[Implies]", 
+    RowBox[{"!", "6"}]}], ")"}], "&&", 
+  RowBox[{"(", 
+   RowBox[{
+    RowBox[{"1", "&&", 
+     RowBox[{"!", "4"}]}], "\[Implies]", 
+    RowBox[{"!", "3"}]}], ")"}], "&&", 
+  RowBox[{"(", 
+   RowBox[{
+    RowBox[{"2", "&&", "4"}], "\[Implies]", 
+    RowBox[{"!", "1"}]}], ")"}], "&&", 
+  RowBox[{"(", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"!", "6"}], "&&", "5"}], "\[Implies]", 
+    RowBox[{"!", "7"}]}], ")"}], "&&", 
+  RowBox[{"(", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"!", "3"}], "&&", 
+     RowBox[{"!", "5"}]}], "\[Implies]", 
+    RowBox[{"!", "4"}]}], ")"}], "&&", 
+  RowBox[{"(", 
+   RowBox[{
+    RowBox[{"2", "&&", "7"}], "\[Implies]", 
+    RowBox[{"!", "6"}]}], ")"}]}]], "Output",
+ CellChangeTimes->{3.69296174756805*^9, 3.6929629399672117`*^9, 
+  3.69296308837857*^9, 3.693028579919231*^9, 3.6931402538771267`*^9}]
+}, Open  ]],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.693209689584264*^9, 3.693209715720557*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Positions", "Section",
+ CellChangeTimes->{{3.6929618261695547`*^9, 3.692961827512403*^9}}],
+
+Cell["\<\
+There are different ways for representing a position: as a set of sentences; \
+as a three-valued vector of length |senIDs|; as an integer.\
+\>", "Text",
+ CellChangeTimes->{{3.692961831992944*^9, 3.692961986267449*^9}}],
+
+Cell["\<\
+Two equivalent representations of one and the partial position\
+\>", "Text",
+ CellChangeTimes->{{3.692962040559822*^9, 3.692962057292446*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"pos1", "=", 
+   RowBox[{"{", 
+    RowBox[{"2", ",", 
+     RowBox[{"!", "3"}]}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"pos2", "=", 
+   RowBox[{"{", 
+    RowBox[{
+    "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "2", ",", "1", ",", 
+     "0"}], "}"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.692962009084195*^9, 3.692962018396476*^9}, {
+  3.6929620623170424`*^9, 3.692962075997039*^9}, {3.692962173235643*^9, 
+  3.69296217556699*^9}, {3.693140450938345*^9, 3.6931404646183233`*^9}}],
+
+Cell["\<\
+Concerning three-valued-vector representations, we count from right to left, \
+and we interpret 1, 2 and 0 as true, false, no truth-value, respectively. \
+\>", "Text",
+ CellChangeTimes->{{3.692962192702785*^9, 3.6929622494958076`*^9}}],
+
+Cell["\<\
+There are functions that transform list to vector representations and vice \
+versa.\
+\>", "Text",
+ CellChangeTimes->{{3.692962264048168*^9, 3.69296228983486*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"ListToTVVector", "[", 
+  RowBox[{"pos1", ",", "senIDs"}], "]"}]], "Input",
+ CellChangeTimes->{{3.69296212175385*^9, 3.692962149294273*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"0", ",", "0", ",", "0", ",", "0", ",", "2", ",", "1", ",", "0"}], 
+  "}"}]], "Output",
+ CellChangeTimes->{{3.692962149966601*^9, 3.692962158331546*^9}, 
+   3.6929630923646317`*^9, 3.693028579974511*^9, 3.6931405004369717`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"TVVectorToList", "[", "pos2", "]"}]], "Input",
+ CellChangeTimes->{{3.692962294856441*^9, 3.6929623084808683`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"2", ",", 
+   RowBox[{"!", "3"}]}], "}"}]], "Output",
+ CellChangeTimes->{3.692962309399433*^9, 3.6930285800366697`*^9, 
+  3.69314050431118*^9}]
+}, Open  ]],
+
+Cell["\<\
+Three-valued vectors can be interpreted as integer written in base 3. E.g., \
+pos2 is the integer\
+\>", "Text",
+ CellChangeTimes->{{3.69296231813028*^9, 3.692962344592798*^9}, {
+  3.6929624291724586`*^9, 3.6929624303545933`*^9}, {3.692962470011252*^9, 
+  3.692962485869193*^9}}],
+
+Cell[BoxData[
+ RowBox[{" ", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"0", "*", 
+     SuperscriptBox["3", "0"]}], "+", 
+    RowBox[{"1", "*", 
+     SuperscriptBox["3", "1"]}], "+", 
+    RowBox[{"2", "*", 
+     SuperscriptBox["3", "2"]}]}], "=", "21"}]}]], "DisplayFormula",
+ CellChangeTimes->{{3.6929624903575563`*^9, 3.692962566924893*^9}, {
+  3.692962633238262*^9, 3.692962633494062*^9}}],
+
+Cell["\<\
+This framework identifies an integer i with the three-valued vector \
+corresponding to i-1, such that the empty position is 1.\
+\>", "Text",
+ CellChangeTimes->{{3.692962657197888*^9, 3.692962743999259*^9}, {
+  3.6929627758240337`*^9, 3.692962784080202*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"TVVectorToInteger", "[", "pos2", "]"}]], "Input",
+ CellChangeTimes->{{3.6929625795646048`*^9, 3.69296259155925*^9}}],
+
+Cell[BoxData["22"], "Output",
+ CellChangeTimes->{3.6929625922466288`*^9, 3.693028580101996*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"IntegerToTVVector", "[", 
+  RowBox[{"22", ",", "senIDs"}], "]"}]], "Input",
+ CellChangeTimes->{{3.692962792624391*^9, 3.692962819329114*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"0", ",", "0", ",", "0", ",", "0", ",", "2", ",", "1", ",", "0"}], 
+  "}"}]], "Output",
+ CellChangeTimes->{3.692962820237843*^9, 3.692963096848235*^9, 
+  3.693028580167811*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"IntegerToTVVector", "[", 
+  RowBox[{"1", ",", "senIDs"}], "]"}]], "Input",
+ CellChangeTimes->{{3.692962822193013*^9, 3.692962833121181*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0"}], 
+  "}"}]], "Output",
+ CellChangeTimes->{3.6929628339887457`*^9, 3.692963099017878*^9, 
+  3.69302858023427*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"IntegerToTVVector", "[", 
+  RowBox[{
+   RowBox[{"3", "^", 
+    RowBox[{"Length", "[", "senIDs", "]"}]}], ",", "senIDs"}], "]"}]], "Input",\
+
+ CellChangeTimes->{{3.692962838787023*^9, 3.692962859553729*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"2", ",", "2", ",", "2", ",", "2", ",", "2", ",", "2", ",", "2"}], 
+  "}"}]], "Output",
+ CellChangeTimes->{3.692962861158163*^9, 3.692963101269526*^9, 
+  3.693028580302471*^9}]
+}, Open  ]],
+
+Cell["We can check whether some position is consistent given tau.", "Text",
+ CellChangeTimes->{{3.692963211144475*^9, 3.692963224951013*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"DialecticallyConsistentQ", "[", 
+  RowBox[{
+   RowBox[{"ListToInteger", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"1", ",", "2", ",", "3"}], "}"}], ",", "senIDs"}], "]"}], ",", 
+   "tau1", ",", "True", ",", "senIDs"}], "]"}]], "Input",
+ CellChangeTimes->{{3.6929632675215387`*^9, 3.692963298906419*^9}, {
+  3.692963382922316*^9, 3.6929634213465137`*^9}}],
+
+Cell[BoxData["True"], "Output",
+ CellChangeTimes->{3.6929634221758547`*^9, 3.693028580369069*^9, 
+  3.693140717241534*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"DialecticallyConsistentQ", "[", 
+  RowBox[{
+   RowBox[{"ListToInteger", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"1", ",", "2", ",", "3", ",", "4"}], "}"}], ",", "senIDs"}], 
+    "]"}], ",", "tau1", ",", "True", ",", "senIDs"}], "]"}]], "Input",
+ CellChangeTimes->{{3.6929632675215387`*^9, 3.692963298906419*^9}, {
+  3.692963382922316*^9, 3.692963436922853*^9}}],
+
+Cell[BoxData["False"], "Output",
+ CellChangeTimes->{3.692963437487958*^9, 3.693028580435762*^9, 
+  3.6931407246785173`*^9}]
+}, Open  ]],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.693140641315535*^9, 3.6931406622972317`*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Sigma", "Section",
+ CellChangeTimes->{{3.6929635049010687`*^9, 3.692963512373472*^9}}],
+
+Cell[TextData[{
+ "In many simulations, the number of complete & consistent positions that \
+extend some partial position have to be calculated over and over again. The \
+function Sigma does this once and for all. It provides for every position ",
+ StyleBox["i",
+  FontSlant->"Italic"],
+ " the number of complete & consistent positions that extend i on tau, stored \
+at index i."
+}], "Text",
+ CellChangeTimes->{{3.692963526113431*^9, 3.692963682014387*^9}, 
+   3.693028736960454*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"sigma", "=", 
+   RowBox[{"Sigma", "[", 
+    RowBox[{"tau1", ",", " ", "True", ",", " ", "senIDs"}], "]"}]}], 
+  ";"}]], "Input",
+ CellChangeTimes->{{3.692963693983124*^9, 3.692963726703484*^9}}],
+
+Cell["sigma is a table.", "Text",
+ CellChangeTimes->{{3.69302876853258*^9, 3.693028771684516*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"3", "^", "7"}], "==", 
+  RowBox[{"Length", "[", "sigma", "]"}]}]], "Input",
+ CellChangeTimes->{{3.692963723190568*^9, 3.692963751863802*^9}}],
+
+Cell[BoxData["True"], "Output",
+ CellChangeTimes->{{3.692963733491005*^9, 3.692963752435861*^9}, 
+   3.6930285807646217`*^9, 3.693140822220305*^9}]
+}, Open  ]],
+
+Cell["\<\
+A position is not consistent, iff there\[CloseCurlyQuote]s no complete and \
+coherent pos that extends it. \
+\>", "Text",
+ CellChangeTimes->{{3.6929637857056*^9, 3.692963812768414*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"sigma", "[", 
+  RowBox[{"[", " ", 
+   RowBox[{"ListToInteger", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"1", ",", "2", ",", "3"}], "}"}], ",", "senIDs"}], "]"}], " ", 
+   "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.6929638223378143`*^9, 3.692963874105929*^9}}],
+
+Cell[BoxData["4"], "Output",
+ CellChangeTimes->{{3.692963849632524*^9, 3.6929638747464*^9}, 
+   3.693028580818461*^9, 3.693140855565752*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"sigma", "[", 
+  RowBox[{"[", " ", 
+   RowBox[{"ListToInteger", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"1", ",", "2", ",", "3", ",", "4"}], "}"}], ",", "senIDs"}], 
+    "]"}], " ", "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.6929638223378143`*^9, 3.692963883938037*^9}}],
+
+Cell[BoxData["0"], "Output",
+ CellChangeTimes->{3.6929638847283916`*^9, 3.693028580885872*^9, 
+  3.6931408734388866`*^9}]
+}, Open  ]],
+
+Cell[BoxData["\[AliasDelimiter]"], "Input",
+ CellChangeTimes->{3.693140956743236*^9}]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{1024, 719},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+Magnification:>1.25 Inherited,
+FrontEndVersion->"11.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (September \
+21, 2016)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 133, 1, 183, "Title"],
+Cell[716, 25, 235, 6, 99, "Subtitle"],
+Cell[954, 33, 822, 24, 139, "Code"],
+Cell[CellGroupData[{
+Cell[1801, 61, 150, 2, 80, "Section"],
+Cell[1954, 65, 121, 1, 37, "Text"],
+Cell[CellGroupData[{
+Cell[2100, 70, 213, 4, 39, "Input"],
+Cell[2316, 76, 260, 5, 39, "Output"]
+}, Open  ]],
+Cell[2591, 84, 107, 1, 37, "Text"],
+Cell[CellGroupData[{
+Cell[2723, 89, 112, 2, 39, "Input"],
+Cell[2838, 93, 135, 3, 39, "Output"]
+}, Open  ]],
+Cell[2988, 99, 135, 1, 37, "Text"],
+Cell[CellGroupData[{
+Cell[3148, 104, 191, 5, 39, "Input"],
+Cell[3342, 111, 190, 5, 39, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[3569, 121, 176, 4, 39, "Input"],
+Cell[3748, 127, 174, 4, 39, "Output"]
+}, Open  ]],
+Cell[3937, 134, 142, 1, 37, "Text"],
+Cell[CellGroupData[{
+Cell[4104, 139, 185, 4, 39, "Input"],
+Cell[4292, 145, 346, 10, 39, "Output"]
+}, Open  ]],
+Cell[4653, 158, 104, 1, 37, "Text"],
+Cell[CellGroupData[{
+Cell[4782, 163, 279, 5, 39, "Input"],
+Cell[5064, 170, 968, 33, 66, "Output"]
+}, Open  ]],
+Cell[6047, 206, 92, 1, 39, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[6176, 212, 96, 1, 80, "Section"],
+Cell[6275, 215, 228, 4, 61, "Text"],
+Cell[6506, 221, 152, 3, 37, "Text"],
+Cell[6661, 226, 546, 14, 66, "Input"],
+Cell[7210, 242, 245, 4, 61, "Text"],
+Cell[7458, 248, 172, 4, 37, "Text"],
+Cell[CellGroupData[{
+Cell[7655, 256, 163, 3, 39, "Input"],
+Cell[7821, 261, 266, 5, 39, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[8124, 271, 138, 2, 39, "Input"],
+Cell[8265, 275, 182, 5, 39, "Output"]
+}, Open  ]],
+Cell[8462, 283, 288, 6, 37, "Text"],
+Cell[8753, 291, 384, 11, 33, "DisplayFormula"],
+Cell[9140, 304, 267, 5, 61, "Text"],
+Cell[CellGroupData[{
+Cell[9432, 313, 140, 2, 39, "Input"],
+Cell[9575, 317, 95, 1, 39, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[9707, 323, 165, 3, 39, "Input"],
+Cell[9875, 328, 215, 5, 39, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[10127, 338, 164, 3, 39, "Input"],
+Cell[10294, 343, 216, 5, 39, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[10547, 353, 230, 6, 39, "Input"],
+Cell[10780, 361, 215, 5, 39, "Output"]
+}, Open  ]],
+Cell[11010, 369, 141, 1, 37, "Text"],
+Cell[CellGroupData[{
+Cell[11176, 374, 388, 9, 39, "Input"],
+Cell[11567, 385, 122, 2, 39, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[11726, 392, 397, 9, 39, "Input"],
+Cell[12126, 403, 123, 2, 39, "Output"]
+}, Open  ]],
+Cell[12264, 408, 94, 1, 39, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[12395, 414, 92, 1, 80, "Section"],
+Cell[12490, 417, 482, 10, 85, "Text"],
+Cell[12975, 429, 229, 6, 39, "Input"],
+Cell[13207, 437, 98, 1, 37, "Text"],
+Cell[CellGroupData[{
+Cell[13330, 442, 176, 4, 39, "Input"],
+Cell[13509, 448, 147, 2, 39, "Output"]
+}, Open  ]],
+Cell[13671, 453, 195, 4, 37, "Text"],
+Cell[CellGroupData[{
+Cell[13891, 461, 297, 8, 39, "Input"],
+Cell[14191, 471, 140, 2, 39, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[14368, 478, 308, 8, 39, "Input"],
+Cell[14679, 488, 121, 2, 39, "Output"]
+}, Open  ]],
+Cell[14815, 493, 85, 1, 39, "Input"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
