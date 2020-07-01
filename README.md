@@ -29,7 +29,9 @@ We provide three scripts to run simulations and generate your own results.
 - `run_simus_random_sample_param.m` has been used to generate the two ensemble with parameter perturbations.
 - `run_simus_random_sample_inicom.m` has been used to generate the ensemble with random initial commitments.
 
-## Caveat: Formal Representation of Positions as Integers
+## Technical Caveats
+
+### Formal Representation of Positions as Integers
 
 We model theories and commitments as positions, that is as subsets of the sentence pool, for example: {1,-4,6} or {2,3,-6,-7}. Such (minimally consistent) positions are represented -- in the code -- as integers. The idea is the following. Every integer n can be written as a ternary number, i.e. 
 
@@ -37,7 +39,7 @@ We model theories and commitments as positions, that is as subsets of the senten
 n = (c_0 * 3^0) + (c_1 * 3^1) + (c_2 * 3^2) + ...
 ```
 
-with 0 ≤ c_i ≤ 2. We now interpret the coeffcients c_i for **n-1** (i.e., the digits of the ternary representation of n-1) as an index function over the non-negative sentence pool which determines whether the position accepts / negates / suspends judgment wrt. a given sentence.
+with 0 ≤ c_i ≤ 2. We now interpret the coefficients c_i for **n-1** (i.e., the digits of the ternary representation of n-1) as an index function over the non-negative sentence pool which determines whether the position accepts / negates / suspends judgment wrt. a given sentence.
 
 As you see for example in `run_4simus.m`, the illustrative initial commitments are represented as {118,121,1090,1333}. Now, 
 
@@ -56,3 +58,24 @@ So, written as a ternary number, 118-1 equals `0011100` (with two `0` padded). 1
 Therefore, the integer 1333 represents the position {3,4,5,-6,7}.
 
 Such ternary representation of positions allows for efficient coding.
+
+
+### Parameters alpha and beta
+
+The simulation runs are initialized with parameters alpha and beta. These parameters determine the relative weight of
+
+- Account vs Systematicity (alpha) in step theory choice,
+- Account vs Faithfulness (beta) in step commitment adjustment.
+
+The higher the parameter values, the more weight is given to account.
+
+These parameters alpha and beta are related to the weights w_a, w_s, and w_f of the achievement (as presented in the paper) as follows:
+
+```
+WeightAccount[alpha_, beta_] := 
+  (alpha*beta)/(alpha + beta - alpha*beta);
+WeightSystematicity[alpha_, beta_] := 
+  (beta - alpha*beta)/(alpha + beta - alpha*beta);
+WeightCloseness[alpha_, beta_] := 
+  1 - (WeightAccount[alpha, beta] + WeightSystematicity[alpha, beta]);
+```
