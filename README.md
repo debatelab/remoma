@@ -1,6 +1,6 @@
 # Reflective Equilibrium MOdel in MAthematica (REMoMa)
 
-This repository complements the philosophical paper **"Making Reflective Equilibrium Precise. A Formal Model" by Beisbart, Betz and Brun**, to-be-published with **[ERGO](https://www.ergophiljournal.org/)**. It includes all the code used to generate the computational results presented and discussed therein.
+This repository complements the philosophical paper **"Making Reflective Equilibrium Precise. A Formal Model"** by C. Beisbart, G. Betz and G. Brun, to-be-published with **[ERGO](https://www.ergophiljournal.org/)**. It includes all the code used to generate the computational results presented and discussed therein.
 
 ## Simulation Results of RE Processes
 
